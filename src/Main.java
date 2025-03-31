@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +22,18 @@ public class Main {
 
         // Sortare nume
         persoane.sort(Comparator.comparing(p -> p.nume));
+
+        // Scriere lista sortata in output.txt
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"))) {
+            for (Persoane p : persoane) {
+                bw.write(p.toString());
+                bw.newLine();
+            }
+        }
+            catch(IOException e){
+                System.out.println("Eroare la citirea fiserului:"+ e.getMessage());
+            }
+
 
         //Afisez
         for (Persoane p : persoane) {
